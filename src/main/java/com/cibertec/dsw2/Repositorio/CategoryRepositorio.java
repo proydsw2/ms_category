@@ -1,6 +1,6 @@
-package com.cibertec.dsw2;
+package com.cibertec.dsw2.Repositorio;
 
-import com.cibertec.dsw2.Category;
+import com.cibertec.dsw2.Modelo.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

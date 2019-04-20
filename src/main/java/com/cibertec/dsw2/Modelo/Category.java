@@ -1,4 +1,4 @@
-package com.cibertec.dsw2;
+package com.cibertec.dsw2.Modelo;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

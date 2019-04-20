@@ -1,5 +1,7 @@
-package com.cibertec.dsw2;
+package com.cibertec.dsw2.Controlador;
 
+import com.cibertec.dsw2.Repositorio.CategoryRepositorio;
+import com.cibertec.dsw2.Modelo.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
