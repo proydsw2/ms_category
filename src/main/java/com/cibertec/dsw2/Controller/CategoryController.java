@@ -12,28 +12,27 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "{/dsw2}")
 public class CategoryController {
 
     @Autowired
     private CategoryRepository rep;
 
 
-    @GetMapping(path = {"/category", "/category/"})
+    @GetMapping(path = "/category")
     public List<Category> retriveAll() {
         return rep.findAll();
     }
 
-    @GetMapping(path = {"/category/{id}", "/category/{id}/"})
+    @GetMapping(path = "/category/{id}")
     public Category retriveOne(@PathVariable Long id) {
-        Optional<Category> cate = rep.findById(id);
+        Optional<Category> category = rep.findById(id);
 
-        return cate.get();
+        return category.get();
     }
 
-    @PostMapping(path = {"/category", "/category/"})
-    public ResponseEntity<Object> create(@RequestBody Category cate) {
-        Category entity = rep.save(cate);
+    @PostMapping(path = "/category")
+    public ResponseEntity<Object> create(@RequestBody Category category) {
+        Category entity = rep.save(category);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(entity.getNum_category_id()).toUri();
@@ -41,21 +40,21 @@ public class CategoryController {
         return ResponseEntity.created(location).build();
     }
 
-    @PutMapping(path = {"/category/{id}", "/category/{id}/"})
-    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Category cate) {
+    @PutMapping(path = "/category/{id}")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Category category) {
         Optional<Category> entity = rep.findById(id);
 
         if (!entity.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        cate.setNum_category_id(id);
-        rep.save(cate);
+        category.setNum_category_id(id);
+        rep.save(category);
 
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping(path = {"/category/{id}", "/category/{id}/"})
+    @DeleteMapping(path = "/category/{id}")
     public void delete(@PathVariable Long id) {
         rep.deleteById(id);
     }

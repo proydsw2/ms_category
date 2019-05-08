@@ -11,22 +11,22 @@ public class Category {
     @Column(name = "num_category_id")
     private Long num_category_id;
 
-    @Column(name = "str_descripcion")
-    private String str_descripcion;
+    @Column(name = "str_description")
+    private String str_description;
 
     public Category(){
 
     }
 
-    public Category(String str_descripcion) {
-        this.str_descripcion = str_descripcion;
+    public Category(String str_description) {
+        this.str_description = str_description;
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "num_category_id=" + num_category_id +
-                ", str_descripcion='" + str_descripcion + '\'' +
+                ", str_descripcion='" + str_description + '\'' +
                 '}';
     }
 
@@ -38,11 +38,11 @@ public class Category {
         this.num_category_id = num_category_id;
     }
 
-    public String getStr_descripcion() {
-        return str_descripcion;
+    public String getstr_description() {
+        return str_description;
     }
 
-    public void setStr_descripcion(String str_descripcion) {
-        this.str_descripcion = str_descripcion;
+    public void setStr_descripcion(String str_description) {
+        this.str_description = str_description;
     }
 }
