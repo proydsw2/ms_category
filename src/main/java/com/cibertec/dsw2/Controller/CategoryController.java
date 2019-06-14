@@ -1,61 +1,40 @@
 package com.cibertec.dsw2.Controller;
 
-import com.cibertec.dsw2.Repository.CategoryRepository;
+
 import com.cibertec.dsw2.Model.Category;
+import com.cibertec.dsw2.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class CategoryController {
 
     @Autowired
-    private CategoryRepository rep;
-
+    private CategoryService categoryService;
 
     @GetMapping(path = "/category")
-    public List<Category> retriveAll() {
-        return rep.findAll();
+    public ResponseEntity<Object> retriveAll() {
+        return categoryService.getAll();
     }
 
     @GetMapping(path = "/category/{id}")
-    public Category retriveOne(@PathVariable Long id) {
-        Optional<Category> category = rep.findById(id);
-
-        return category.get();
+    public ResponseEntity<Object> retriveOne(@PathVariable Integer id) {
+        return categoryService.getOne(id);
     }
 
     @PostMapping(path = "/category")
     public ResponseEntity<Object> create(@RequestBody Category category) {
-        Category entity = rep.save(category);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(entity.getNum_category_id()).toUri();
-
-        return ResponseEntity.created(location).build();
+        return categoryService.insert(category);
     }
 
     @PutMapping(path = "/category/{id}")
-    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Category category) {
-        Optional<Category> entity = rep.findById(id);
-
-        if (!entity.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        category.setNum_category_id(id);
-        rep.save(category);
-
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Object> update(@PathVariable Integer id, @RequestBody Category category) {
+        return categoryService.update(id, category);
     }
 
     @DeleteMapping(path = "/category/{id}")
-    public void delete(@PathVariable Long id) {
-        rep.deleteById(id);
+    public ResponseEntity<Object> delete(@PathVariable Integer id) {
+        return categoryService.delete(id);
     }
 }
